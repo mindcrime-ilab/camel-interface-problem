@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.7.RELEASE'
+    }
+    repositories {
+	    jcenter()
+	    mavenCentral()
+    }
+    dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+      classpath("io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE")
+    }
+}
+
+
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'java'
+
+
+configurations {
+    providedRuntime
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.camelVersion = '2.16.2'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-actuator'
+    
+    
+    compile group: 'org.apache.camel', name: 'camel-spring-boot', version: camelVersion
+    compile group: 'org.apache.camel', name: 'camel-servlet', version: camelVersion
+    compile group: 'org.apache.camel', name: 'camel-spring-javaconfig', version: camelVersion
+     
+    
+    
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.apache.camel', name: 'camel-test', version: camelVersion
+    testCompile group: 'org.apache.camel', name: 'camel-test-spring', version: camelVersion
+    testCompile group: 'org.apache.camel', name: 'camel-test-spring40', version: camelVersion
+    testCompile group: 'org.springframework', name: 'spring-test'    
+    
+
+	providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+}
